@@ -6,7 +6,6 @@
  * Creates a reverse hangman game
  * Bugs/Notes: 
  * - execution of the hangman image is probably coded weirdly
- * - might guess a letter more than once, couldn't figure out how to fix it
  */
 
 import java.util.*;
@@ -187,7 +186,7 @@ public class Problem2 {
 	public static char rLetter(String checkStr) {
 		int rASCIIval =  rNum();
 		char rLetter = (char) rASCIIval;
-		checkRep(checkStr, rLetter);
+		rLetter = checkRep(checkStr, rLetter);
 		return rLetter;
 	}
 
@@ -202,15 +201,15 @@ public class Problem2 {
 	/**
 	 * Checks if rLetter is repeated and add it to checkedStr
 	 */ 
-	public static void checkRep(String checkStr, char rLetter) {
+	public static char checkRep(String checkStr, char rLetter) {
 		for (int i = checkStr.length()-1; i >= 0; i--) {
 			char c = checkStr.charAt(i);
 			//Letter was already guessed before, Generates new letter
 			if (c == rLetter) { 
-				checkStr += c;
-				rLetter(checkStr);
-			}
+				rLetter = rLetter(checkStr);
+			} 
 		}
+		return rLetter;
 
 	}
 
